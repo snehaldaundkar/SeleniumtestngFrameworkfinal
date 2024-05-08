@@ -4,33 +4,62 @@ import java.io.IOException;
 
 import org.openqa.selenium.By;
 import org.testng.annotations.Test;
+import org.testng.asserts.SoftAssert;
 
 import PageObjectModel.RegistrationPageObject;
 import resources.baseClass;
+import resources.constant;
 
 public class VerifyRegistrationTestCases extends baseClass {
-	
-	
-	
-	
+
 	@Test
 	public void VerifyRegistrationWithValidData() throws IOException {
-		driverInitilization();
-        //this driver has scope we will pass the scope this driver to registration objecvt page drierv
-		driver.get("https://naveenautomationlabs.com/opencart/");
+	
 
-		RegistrationPageObject rpo = new RegistrationPageObject(driver);//we pass the drievr in object to give scope to that driver
+		RegistrationPageObject rpo = new RegistrationPageObject(driver);// we pass the drievr in object to give scope to
+																		// that driver
 
 		rpo.clickOnMyAccount().click();
 		rpo.clickOnRegister().click();
-		rpo.Enterfirstname().sendKeys("abc");
-		rpo.Enterlastname().sendKeys("test");
+		rpo.Enterfirstname().sendKeys(constant.firstname);
+		rpo.Enterlastname().sendKeys(constant.lastname);
 		rpo.Enteremail().sendKeys(Email);
-		rpo.Entertelephone().sendKeys("9874563210");
-		rpo.Enterpassword().sendKeys("secure");
-		rpo.Enterpasswordconfirm().sendKeys("secure");
-	
+		rpo.Entertelephone().sendKeys(constant.phone);
+		rpo.Enterpassword().sendKeys(constant.password);
+		rpo.Enterpasswordconfirm().sendKeys(constant.confirmpassword);
+
 		rpo.clickOnpolicycheck().click();
 		rpo.clickOnsubmit().click();
+
+		SoftAssert sa = new SoftAssert();
+		String expected = constant.accountcreatetext;
+		String actual =rpo.actualtext().getText();
+		sa.assertEquals(actual, expected);
+		sa.assertAll();
 	}
+
+	@Test(priority=1)
+	public void VerifyRegistrationWithINValidData() throws IOException {
+		
+		RegistrationPageObject rpo = new RegistrationPageObject(driver);// we pass the drievr in object to give scope to
+																		// that driver
+
+		rpo.clickOnMyAccount().click();
+		rpo.clickOnRegister().click();
+		rpo.clickOnsubmit().click();
+
+		SoftAssert sa = new SoftAssert();
+		String fnexpected = constant.fnexpectedtext;
+		String fnactual = rpo.fnactualtext().getText();
+		sa.assertEquals(fnactual, fnexpected);
+		
+		String lnexpected = constant.lnexpectedtext;
+		String lnactual = rpo.lnactualtext().getText();
+		sa.assertEquals(lnactual, lnexpected);
+		
+		
+		sa.assertAll();
+		
+	}
+
 }
