@@ -19,7 +19,12 @@ public class RegistrationPageObject {
 	private By passwordconfirm = By.xpath("//input[@name='confirm']");
 	private By policycheck = By.xpath("//input[@type='checkbox']");
 	private By submit = By.xpath("//input[@type='submit']");
-
+	private By Actual=By.xpath("//div[text()='First Name must be between 1 and 32 characters!']");
+	private By lnActual=By.xpath("//div[text()='Last Name must be between 1 and 32 characters!']");
+	private By	actualtext=By.xpath("//h1[text()='Your Account Has Been Created!']");
+	
+	
+	
 	public RegistrationPageObject(WebDriver driver2) {
 	
 		this.driver=driver2;
@@ -67,4 +72,16 @@ public class RegistrationPageObject {
 	    return driver.findElement(submit);
 	}
 	
+	public WebElement fnactualtext() {
+
+	    return driver.findElement(Actual);
+	}
+	public WebElement lnactualtext() {
+
+	    return driver.findElement(actualtext);
+	}
+	public WebElement actualtext() {
+
+	    return driver.findElement(lnActual);
+	}
 }
