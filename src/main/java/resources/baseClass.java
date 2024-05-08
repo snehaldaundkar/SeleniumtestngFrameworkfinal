@@ -8,20 +8,24 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.testng.annotations.BeforeMethod;
+
+import PageObjectModel.RegistrationPageObject;
 
 public class baseClass {
 
 	public  WebDriver driver;
 	public static String Email= genrateRandomEmailID();
+	public Properties prop;
 	
 	//Browser code--
 	public void driverInitilization() throws IOException
     {
 	     //Reading Data.properties file
-		FileInputStream fis=new FileInputStream("C:\\Users\\ADMIN\\eclipse-workspace\\AutomationProject\\src\\main\\java\\resources\\Data.properties");
+		FileInputStream fis=new FileInputStream(System.getProperty("user.dir")+"\\src\\main\\java\\resources\\Data.properties");
 	
        //want to access the data from properties file
-	    Properties prop=new Properties();//proerties is class of java 
+	    prop=new Properties();//proerties is class of java 
     
 	    prop.load(fis);//load file 
 	    String BrowserName=prop.getProperty("browser");//it will give the value is chrome stored in data properties
@@ -41,7 +45,7 @@ public class baseClass {
 	    }
 	    else
 	    {
-	    	System.out.println("Please choose valid browser");
+	    	System.out.println("Please choose proper driver value");
 	    }
     
     }
@@ -51,7 +55,15 @@ public class baseClass {
 		return "abc" + System.currentTimeMillis() +"@gmail.com";
 	}
 	    
+	    @BeforeMethod
+  public void LaunchBrowser() throws IOException
+  {
+	    	driverInitilization();
+	    	
+	    	driver.get(prop.getProperty("url"));
+
+			
+  }
 	    
-  
 	
 }
