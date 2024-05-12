@@ -12,5 +12,5 @@ public class constant {
 	public static String fnexpectedtext="First Name must be between 1 and 32 characters!";
 	public static String lnexpectedtext="Last Name must be between 1 and 32 characters!";
 	public static String MyAccount="My Account";
-	 public static String expectedworning="Warning: No match for E-Mail Address and/or Password.";
+	 public static String expectedworning="Warning: Your account has exceeded allowed number of login attempts. Please try again in 1 hour.";
 }

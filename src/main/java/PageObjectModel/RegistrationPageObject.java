@@ -78,10 +78,10 @@ public class RegistrationPageObject {
 	}
 	public WebElement lnactualtext() {
 
-	    return driver.findElement(actualtext);
+	    return driver.findElement(lnActual);
 	}
 	public WebElement actualtext() {
 
-	    return driver.findElement(lnActual);
+	    return driver.findElement(actualtext);
 	}
 }
